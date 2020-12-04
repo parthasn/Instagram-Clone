@@ -26,3 +26,29 @@
 .post_text {
     padding: 15px;
 }
+
+.post_commentBox {
+    display: flex;
+    margin-top: 10px;
+}
+
+.post_input {
+    padding: 6px;
+    border: none;
+    border-top: 1px solid lightgray;
+    margin: 10px;
+    flex: 1;
+}
+
+.post_button {
+    padding: 5px;
+    margin: 10px;
+    color: #6082a3;
+    border-radius: 5px;
+    background-color: transparent;
+    flex: 0;
+}
+
+.post_comments {
+    padding: 15px;
+}
