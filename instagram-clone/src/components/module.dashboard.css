@@ -14,8 +14,13 @@
     border-bottom: 1px solid lightgray;
     object-fit: contain;
     display: flex;
+    justify-content: space-between;
     
     
+}
+
+.dashboard_headerImage {
+    object-fit: contain;
 }
 
 .dashboard_signup {
@@ -23,12 +28,8 @@
     flex-direction: column;
 }
 
-.dashboard_credentials {
-    position: absolute;
-    right: 20px;
-
-}
-
 .dashboard_posts {
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
