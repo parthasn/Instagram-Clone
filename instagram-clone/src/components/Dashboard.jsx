@@ -5,6 +5,7 @@ import { db, auth } from '../firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core'
+import ImageUpload from './ImageUpload'
 
 function getModalStyle() {
     const top = 50;
@@ -61,7 +62,7 @@ function Dashboard() {
     );
 
     useEffect(() => {
-        db.collection('posts').onSnapshot((snapshot) => {
+        db.collection('posts').orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
             // every time a new post is added, this code is fired
             setPosts(
                 snapshot.docs.map((doc) => ({
@@ -99,12 +100,17 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
+            {
+                user?.displayName ? (
+                    <ImageUpload username = {user.displayName}/>
+                ) : (
+                    <h3>Sorry, you need to signin to upload...</h3>
+                )
+            }
             
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
             >
                 <div style={modalStyle} className={classes.paper}>
                     <form className="dashboard_signup">
@@ -142,8 +148,6 @@ function Dashboard() {
             <Modal
                 open={openSignIn}
                 onClose={() => setOpenSignIn(false)}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
             >
                 <div style={modalStyle} className={classes.paper}>
                     <form className="dashboard_signup">
@@ -179,8 +183,8 @@ function Dashboard() {
                     src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
                     alt=""
                 />
-            </div>
-            {user ? (
+                <div className = "dashboard_credentials">
+                {user ? (
                 <Button onClick={() => auth.signOut()}>Sign Out</Button>
             ) : (
                 <div className="dashboard_loginContainer">
@@ -189,11 +193,16 @@ function Dashboard() {
 
                 </div>
             )}
+                </div>
+            </div>
+            
 
+            <div className = "dashboard_posts">
             {posts &&
                 posts.map(({ id, post }) => (
                     <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
                 ))}
+            </div>
         </div>
     );
 }

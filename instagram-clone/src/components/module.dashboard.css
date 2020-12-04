@@ -4,16 +4,31 @@
 
 .dashboard {
     background-color: #fafafa;
+    
 }
 
 .dashboard_header {
+    position: relative;
     background-color: white;
     padding: 20px;
     border-bottom: 1px solid lightgray;
     object-fit: contain;
+    display: flex;
+    
+    
 }
 
 .dashboard_signup {
     display: flex;
     flex-direction: column;
+}
+
+.dashboard_credentials {
+    position: absolute;
+    right: 20px;
+
+}
+
+.dashboard_posts {
+    padding: 10px;
 }
